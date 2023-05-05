@@ -15,6 +15,7 @@ const tableName = "users"
 type Repository interface {
 	Create(ctx context.Context, model *model.User) error
 	Delete(ctx context.Context, model *model.Query) error
+	Update(ctx context.Context, query *model.Query, user *model.User) error
 }
 
 type repository struct {
@@ -39,6 +40,30 @@ func (r *repository) Create(ctx context.Context, model *model.User) error {
 
 	log.Printf("insert query with params: %s, %s", query, values)
 	rows, err := r.conPool.Query(ctx, query, values...)
+	if err != nil {
+		return err
+	}
+	defer rows.Close()
+
+	return nil
+}
+
+func (r *repository) Update(ctx context.Context, query *model.Query, user *model.User) error {
+	builder := sq.Update(tableName).PlaceholderFormat(sq.Dollar).
+		Set("username", user.Username).
+		Set("email", user.Email).
+		Set("password", user.Password).
+		Set("role", user.Role).
+		Set("updated_at", sq.Expr("NOW()")).
+		Where("username = ?", query.Username)
+
+	sql, args, err := builder.ToSql()
+	if err != nil {
+		return err
+	}
+
+	log.Printf("update query with params: %s, %s", sql, args)
+	rows, err := r.conPool.Query(ctx, sql, args...)
 	if err != nil {
 		return err
 	}

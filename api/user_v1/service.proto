@@ -6,6 +6,7 @@ option go_package="github.com/illabb13/users_auth/pkg/user_v1;user_v1";
 
 service UserV1 {
   rpc Create(CreateRequest) returns (CreateResponse);
+  rpc Update(UpdateRequest) returns (UpdateResponse);
   rpc Delete(DeleteRequest) returns (DeleteResponse);
 }
 
@@ -21,11 +22,24 @@ message QueryInfo {
   string username = 1;
 }
 
+// Create
+
 message CreateRequest {
   UserInfo user = 1;
 }
 
 message CreateResponse {}
+
+// Update
+
+message UpdateRequest {
+  QueryInfo query = 1;
+  UserInfo user = 2;
+}
+
+message UpdateResponse {}
+
+// Delete
 
 message DeleteRequest {
   QueryInfo query = 1;
