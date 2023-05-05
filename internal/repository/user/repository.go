@@ -67,10 +67,12 @@ func (r *repository) Get(ctx context.Context, query *model.Query) (*model.UserIn
 	defer rows.Close()
 
 	var user model.UserInfo
-	rows.Next()
-	err = rows.Scan(&user.Username, &user.Email, &user.Role, &user.CreatedAt, &user.UpdatedAt)
-	if err != nil {
-		return nil, err
+	row := rows.Next()
+	if row {
+		err = rows.Scan(&user.Username, &user.Email, &user.Role, &user.CreatedAt, &user.UpdatedAt)
+		if err != nil {
+			return nil, err
+		}
 	}
 	return &user, nil
 }
