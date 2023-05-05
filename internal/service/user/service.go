@@ -3,8 +3,8 @@ package user
 import (
 	"context"
 
-	model "github.com/illabb13/users_auth/internal/model/user"
-	repo "github.com/illabb13/users_auth/internal/repository/user"
+	model "github.com/illabb13/user-auth-api/internal/model/user"
+	repo "github.com/illabb13/user-auth-api/internal/repository/user"
 )
 
 type Service interface {

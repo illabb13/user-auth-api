@@ -1,4 +1,4 @@
-module github.com/illabb13/users_auth
+module github.com/illabb13/user-auth-api
 
 go 1.20
 

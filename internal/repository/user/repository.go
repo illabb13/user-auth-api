@@ -7,7 +7,7 @@ import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/jackc/pgx/v4/pgxpool"
 
-	model "github.com/illabb13/users_auth/internal/model/user"
+	model "github.com/illabb13/user-auth-api/internal/model/user"
 )
 
 const tableName = "users"

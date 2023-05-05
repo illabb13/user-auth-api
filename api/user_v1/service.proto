@@ -4,7 +4,7 @@ import "google/protobuf/timestamp.proto";
 
 package user_v1;
 
-option go_package="github.com/illabb13/users_auth/pkg/user_v1;user_v1";
+option go_package="github.com/illabb13/user-auth-api/pkg/user_v1;user_v1";
 
 service UserV1 {
   rpc Create(CreateRequest) returns (CreateResponse);

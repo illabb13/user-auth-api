@@ -3,7 +3,7 @@ package user
 import (
 	"context"
 
-	model "github.com/illabb13/users_auth/internal/model/user"
+	model "github.com/illabb13/user-auth-api/internal/model/user"
 )
 
 func (s *service) Get(ctx context.Context, query *model.Query) (*model.UserInfo, error) {

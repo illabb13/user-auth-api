@@ -11,10 +11,10 @@ import (
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/joho/godotenv"
 
-	api "github.com/illabb13/users_auth/internal/api/user_v1"
-	repo "github.com/illabb13/users_auth/internal/repository/user"
-	service "github.com/illabb13/users_auth/internal/service/user"
-	pkg "github.com/illabb13/users_auth/pkg/user_v1"
+	api "github.com/illabb13/user-auth-api/internal/api/user_v1"
+	repo "github.com/illabb13/user-auth-api/internal/repository/user"
+	service "github.com/illabb13/user-auth-api/internal/service/user"
+	pkg "github.com/illabb13/user-auth-api/pkg/user_v1"
 )
 
 const grpcPort = ":50051"

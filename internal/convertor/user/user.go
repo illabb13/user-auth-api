@@ -3,8 +3,8 @@ package user
 import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	model "github.com/illabb13/users_auth/internal/model/user"
-	pkg "github.com/illabb13/users_auth/pkg/user_v1"
+	model "github.com/illabb13/user-auth-api/internal/model/user"
+	pkg "github.com/illabb13/user-auth-api/pkg/user_v1"
 )
 
 func ToQuery(search *pkg.QueryInfo) *model.Query {

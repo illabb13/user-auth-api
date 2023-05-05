@@ -1,8 +1,8 @@
 package user_v1
 
 import (
-	service "github.com/illabb13/users_auth/internal/service/user"
-	pkg "github.com/illabb13/users_auth/pkg/user_v1"
+	service "github.com/illabb13/user-auth-api/internal/service/user"
+	pkg "github.com/illabb13/user-auth-api/pkg/user_v1"
 )
 
 type Implementation struct {

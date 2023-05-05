@@ -4,8 +4,8 @@ import (
 	"context"
 	"log"
 
-	converter "github.com/illabb13/users_auth/internal/convertor/user"
-	pkg "github.com/illabb13/users_auth/pkg/user_v1"
+	converter "github.com/illabb13/user-auth-api/internal/convertor/user"
+	pkg "github.com/illabb13/user-auth-api/pkg/user_v1"
 )
 
 func (i *Implementation) Delete(ctx context.Context, req *pkg.DeleteRequest) (*pkg.DeleteResponse, error) {
