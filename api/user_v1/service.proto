@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package user_v1;
+
+option go_package="github.com/illabb13/user-auth-api/pkg/user_v1;user_v1";
+
+service UserV1 {
+  rpc Create(CreateRequest) returns (CreateResponse);
+  rpc Get(GetRequest) returns (GetResponse);
+  rpc Update(UpdateRequest) returns (UpdateResponse);
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+}
+
+enum Role {
+  admin = 0;
+  user = 1;
+}
+
+// Messages
+
+message UserNewData {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+  string password_confirm = 4;
+  Role role = 5;
+}
+
+message UserInfo {
+  string username = 1;
+  string email = 2;
+  Role role = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message QueryInfo {
+  string username = 1;
+}
+
+// Create
+
+message CreateRequest {
+  UserNewData user = 1;
+}
+
+message CreateResponse {}
+
+// Read
+
+message GetRequest {
+  QueryInfo query = 1;
+}
+
+message GetResponse {
+  UserInfo user = 1;
+}
+
+// Update
+
+message UpdateRequest {
+  QueryInfo query = 1;
+  UserNewData user = 2;
+}
+
+message UpdateResponse {}
+
+// Delete
+
+message DeleteRequest {
+  QueryInfo query = 1;
+}
+
+message DeleteResponse {}
