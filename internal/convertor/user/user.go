@@ -16,6 +16,6 @@ func ToUser(user *pkg.UserInfo) *model.User {
 		Username: user.GetUsername(),
 		Email:    user.GetEmail(),
 		Password: user.GetPassword(),
-		Role:     user.GetRole(),
+		Role:     user.GetRole().String(),
 	}
 }

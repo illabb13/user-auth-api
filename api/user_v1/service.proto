@@ -10,12 +10,18 @@ service UserV1 {
   rpc Delete(DeleteRequest) returns (DeleteResponse);
 }
 
+enum Role {
+  admin = 0;
+  user = 1;
+}
+
+
 message UserInfo {
   string username = 1;
   string email = 2;
   string password = 3;
   string password_confirm = 4;
-  string role = 5;
+  Role role = 5;
 }
 
 message QueryInfo {
