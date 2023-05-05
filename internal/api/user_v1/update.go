@@ -11,7 +11,7 @@ import (
 func (i *Implementation) Update(ctx context.Context, req *pkg.UpdateRequest) (*pkg.UpdateResponse, error) {
 	query := converter.ToQuery(req.GetQuery())
 	user := converter.ToUser(req.GetUser())
-	log.Printf("updating user: %s\n", user)
+	log.Printf("updating user by query: %s, %s\n", user, query)
 	err := i.service.Update(ctx, query, user)
 	if err != nil {
 		return nil, err

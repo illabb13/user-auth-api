@@ -8,8 +8,9 @@ import (
 )
 
 type Service interface {
-	Create(ctx context.Context, model *model.User) error
-	Delete(ctx context.Context, model *model.Query) error
+	Create(ctx context.Context, user *model.User) error
+	Get(ctx context.Context, query *model.Query) (*model.UserInfo, error)
+	Delete(ctx context.Context, user *model.Query) error
 	Update(ctx context.Context, query *model.Query, user *model.User) error
 }
 

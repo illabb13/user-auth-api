@@ -14,7 +14,8 @@ const tableName = "users"
 
 type Repository interface {
 	Create(ctx context.Context, model *model.User) error
-	Delete(ctx context.Context, model *model.Query) error
+	Get(ctx context.Context, query *model.Query) (*model.UserInfo, error)
+	Delete(ctx context.Context, user *model.Query) error
 	Update(ctx context.Context, query *model.Query, user *model.User) error
 }
 
@@ -28,10 +29,10 @@ func NewRepository(pool *pgxpool.Pool) *repository {
 	}
 }
 
-func (r *repository) Create(ctx context.Context, model *model.User) error {
+func (r *repository) Create(ctx context.Context, user *model.User) error {
 	builder := sq.Insert(tableName).PlaceholderFormat(sq.Dollar).
 		Columns("username", "email", "password", "role").
-		Values(model.Username, model.Email, model.Password, model.Role)
+		Values(user.Username, user.Email, user.Password, user.Role)
 
 	query, values, err := builder.ToSql()
 	if err != nil {
@@ -46,6 +47,32 @@ func (r *repository) Create(ctx context.Context, model *model.User) error {
 	defer rows.Close()
 
 	return nil
+}
+
+func (r *repository) Get(ctx context.Context, query *model.Query) (*model.UserInfo, error) {
+	builder := sq.Select("username", "email", "role", "created_at", "updated_at").
+		From(tableName).
+		Where("username = ?", query.Username).
+		PlaceholderFormat(sq.Dollar)
+	sql, args, err := builder.ToSql()
+	if err != nil {
+		return nil, err
+	}
+
+	log.Printf("select query with params: %s, %s", sql, args)
+	rows, err := r.conPool.Query(ctx, sql, args...)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var user model.UserInfo
+	rows.Next()
+	err = rows.Scan(&user.Username, &user.Email, &user.Role, &user.CreatedAt, &user.UpdatedAt)
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
 }
 
 func (r *repository) Update(ctx context.Context, query *model.Query, user *model.User) error {
@@ -72,9 +99,9 @@ func (r *repository) Update(ctx context.Context, query *model.Query, user *model
 	return nil
 }
 
-func (r *repository) Delete(ctx context.Context, model *model.Query) error {
+func (r *repository) Delete(ctx context.Context, user *model.Query) error {
 	builder := sq.Delete(tableName).PlaceholderFormat(sq.Dollar).
-		Where("username = ?", model.Username)
+		Where("username = ?", user.Username)
 
 	query, values, err := builder.ToSql()
 	if err != nil {
