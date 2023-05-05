@@ -7,7 +7,7 @@ import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/jackc/pgx/v4/pgxpool"
 
-	"github.com/illabb13/users_auth/internal/model"
+	model "github.com/illabb13/users_auth/internal/model/user"
 )
 
 const tableName = "users"
@@ -15,7 +15,7 @@ const tableName = "users"
 type Repository interface {
 	Create(ctx context.Context, model *model.UserNewData) error
 	Get(ctx context.Context, query *model.Query) (*model.UserInfo, error)
-	Delete(ctx context.Context, user *model.Query) error
+	Delete(ctx context.Context, query *model.Query) error
 	Update(ctx context.Context, query *model.Query, user *model.UserNewData) error
 }
 

@@ -3,7 +3,7 @@ package user
 import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/illabb13/users_auth/internal/model"
+	model "github.com/illabb13/users_auth/internal/model/user"
 	pkg "github.com/illabb13/users_auth/pkg/user_v1"
 )
 

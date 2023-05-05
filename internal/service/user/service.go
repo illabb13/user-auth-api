@@ -3,14 +3,14 @@ package user
 import (
 	"context"
 
-	"github.com/illabb13/users_auth/internal/model"
+	model "github.com/illabb13/users_auth/internal/model/user"
 	repo "github.com/illabb13/users_auth/internal/repository/user"
 )
 
 type Service interface {
 	Create(ctx context.Context, user *model.UserNewData) error
 	Get(ctx context.Context, query *model.Query) (*model.UserInfo, error)
-	Delete(ctx context.Context, user *model.Query) error
+	Delete(ctx context.Context, query *model.Query) error
 	Update(ctx context.Context, query *model.Query, user *model.UserNewData) error
 }
 
