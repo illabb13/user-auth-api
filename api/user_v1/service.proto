@@ -20,7 +20,7 @@ enum Role {
 
 // Messages
 
-message UpdateUserInfo {
+message UserNewData {
   string username = 1;
   string email = 2;
   string password = 3;
@@ -43,7 +43,7 @@ message QueryInfo {
 // Create
 
 message CreateRequest {
-  UpdateUserInfo user = 1;
+  UserNewData user = 1;
 }
 
 message CreateResponse {}
@@ -62,7 +62,7 @@ message GetResponse {
 
 message UpdateRequest {
   QueryInfo query = 1;
-  UpdateUserInfo user = 2;
+  UserNewData user = 2;
 }
 
 message UpdateResponse {}

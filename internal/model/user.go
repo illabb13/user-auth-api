@@ -6,7 +6,7 @@ type Query struct {
 	Username string
 }
 
-type User struct {
+type UserNewData struct {
 	Username string
 	Email    string
 	Password string

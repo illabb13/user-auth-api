@@ -13,8 +13,8 @@ func ToQuery(search *pkg.QueryInfo) *model.Query {
 	}
 }
 
-func ToUser(user *pkg.UpdateUserInfo) *model.User {
-	return &model.User{
+func ToUserNewData(user *pkg.UserNewData) *model.UserNewData {
+	return &model.UserNewData{
 		Username: user.GetUsername(),
 		Email:    user.GetEmail(),
 		Password: user.GetPassword(),

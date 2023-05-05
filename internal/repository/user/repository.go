@@ -13,10 +13,10 @@ import (
 const tableName = "users"
 
 type Repository interface {
-	Create(ctx context.Context, model *model.User) error
+	Create(ctx context.Context, model *model.UserNewData) error
 	Get(ctx context.Context, query *model.Query) (*model.UserInfo, error)
 	Delete(ctx context.Context, user *model.Query) error
-	Update(ctx context.Context, query *model.Query, user *model.User) error
+	Update(ctx context.Context, query *model.Query, user *model.UserNewData) error
 }
 
 type repository struct {
@@ -29,7 +29,7 @@ func NewRepository(pool *pgxpool.Pool) *repository {
 	}
 }
 
-func (r *repository) Create(ctx context.Context, user *model.User) error {
+func (r *repository) Create(ctx context.Context, user *model.UserNewData) error {
 	builder := sq.Insert(tableName).PlaceholderFormat(sq.Dollar).
 		Columns("username", "email", "password", "role").
 		Values(user.Username, user.Email, user.Password, user.Role)
@@ -75,7 +75,7 @@ func (r *repository) Get(ctx context.Context, query *model.Query) (*model.UserIn
 	return &user, nil
 }
 
-func (r *repository) Update(ctx context.Context, query *model.Query, user *model.User) error {
+func (r *repository) Update(ctx context.Context, query *model.Query, user *model.UserNewData) error {
 	builder := sq.Update(tableName).PlaceholderFormat(sq.Dollar).
 		Set("username", user.Username).
 		Set("email", user.Email).

@@ -8,10 +8,10 @@ import (
 )
 
 type Service interface {
-	Create(ctx context.Context, user *model.User) error
+	Create(ctx context.Context, user *model.UserNewData) error
 	Get(ctx context.Context, query *model.Query) (*model.UserInfo, error)
 	Delete(ctx context.Context, user *model.Query) error
-	Update(ctx context.Context, query *model.Query, user *model.User) error
+	Update(ctx context.Context, query *model.Query, user *model.UserNewData) error
 }
 
 type service struct {

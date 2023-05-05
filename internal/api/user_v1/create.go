@@ -9,7 +9,7 @@ import (
 )
 
 func (i *Implementation) Create(ctx context.Context, req *pkg.CreateRequest) (*pkg.CreateResponse, error) {
-	user := converter.ToUser(req.GetUser())
+	user := converter.ToUserNewData(req.GetUser())
 	log.Printf("creating user: %s\n", user)
 	err := i.service.Create(ctx, user)
 	if err != nil {
